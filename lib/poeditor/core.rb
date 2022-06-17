@@ -78,7 +78,9 @@ module POEditor
       end
 
       download_uri = URI(data["result"]["url"])
-      content = Net::HTTP.get(download_uri)
+      # https://yehudakatz.com/2010/05/17/encodings-unabridged/
+      # I have to force encoding, to access the meothod
+      content = Net::HTTP.get(download_uri).force_encoding('utf-8')
 
       case type
       when "apple_strings"
